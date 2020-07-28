@@ -17,16 +17,3 @@ const Input = ({type, name, id, handleChange, value, handleBlur, handleFocus}) =
 }
 
 export default Input;
-
-                    {/* <input 
-                        type="number"
-                        name="cvc" 
-                        id="cvc"
-                        onChange={formik.handleChange}
-                        onBlur={(e) => (
-                            setShowCreditCard(false),
-                            formik.handleBlur(e)
-                        )}
-                        onFocus={() => setShowCreditCard(true)}
-                        value={formik.values.cvc}
-                    /> */}
