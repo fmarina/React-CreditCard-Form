@@ -78,6 +78,10 @@
     border-radius: 100%;
 }
 
+.cvc:focus {
+    background-color: red;
+}
+
 .chip-container img {
     width: 30px;
     height: 20px;
@@ -131,6 +135,13 @@ form input:focus {
     border-bottom: 2px solid rgb(98, 126, 253);
 }
 
+.formik-errors {
+    color: red;
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 10px;
+}
+
 form button {
     width: 50%;
     align-self: center;
@@ -147,4 +158,30 @@ form button {
 
 button:hover {
     opacity: 0.9;
+}
+
+@media(min-width: 1024px) {
+    .form-container {
+        width: 100%;
+        height: 80vh;
+        margin: 20px auto;
+        max-width: 1024px;
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: center;
+        border: 1px solid rgba(0, 0, 0, 0.178);
+        border-radius: 20px;
+    }
+    
+    .credit-card-content {
+        width: 45%;
+        align-items: center;
+    }
+
+    .form-content {
+        width: 45%;    
+        height: 100%;
+        margin-top: 20px;
+    }
+
 }
