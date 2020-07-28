@@ -22,8 +22,6 @@ const validate = (values) => {
 
     if(!values.cvc) {
         errors.cvc = "Requerido";
-    } else if(typeof(values.cvc) !== "number" ) {
-        errors.cvc = "Tipo de dato incorrecto";
     } else if (String(values.cvc).length !== 3) {
         errors.cvc = "Debe ingresar los 3 dígitos de seguridad";
     }
@@ -32,9 +30,9 @@ const validate = (values) => {
         errors.dni = "Requerido";
     } else if (typeof(values.dni) !== "number") {
         errors.dni = "Tipo de dato inválido";
-    } else if (String(values.dni).length !== 7 || String(values.dni).length !== 8) {
+    } else if (String(values.dni).length !== 7 && String(values.dni).length !== 8) {
         errors.dni = "Documento inválido";
-    }
+    } 
 
     return errors;
 }
