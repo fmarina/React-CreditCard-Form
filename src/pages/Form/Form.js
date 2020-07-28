@@ -16,7 +16,8 @@ const Form = () => {
         initialValues: {
             cardNumber: '',
             fullName: '',
-            expiryDate: 'MM/YY',
+            month: '',
+            year: '',
             cvc: '',
             dni: ''  
         },
@@ -34,14 +35,12 @@ const Form = () => {
 
     const formatCardNumber = (cardNumber) => {
         // amex format 4 6 5 digitos
-        if(cardNumber.replace(/ /g, '').match(/\b(\d{4})(\d{6})(\d{5})\b/)) {
-            cardNumber = cardNumber.replace(/\W/gi, '')
-                                   .replace(/\b(\d{4})(\d{6})(\d{5})\b/, '$1 $2 $3')
-                                   .trim();
-        } else { // visa, master format
-            cardNumber = cardNumber.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ').trim();
-        }
-        return cardNumber
+        return (cardNumber.replace(/ /g, '').match(/\b(\d{4})(\d{6})(\d{5})\b/))
+        ? cardNumber = cardNumber.replace(/\W/gi, '')
+                                 .replace(/\b(\d{4})(\d{6})(\d{5})\b/, '$1 $2 $3')
+                                 .trim()
+        // visa, master format
+        : cardNumber = cardNumber.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ').trim();
     }
 
     return (
@@ -86,7 +85,14 @@ const Form = () => {
                                     : formik.values.fullName
                                 }
                             </div>
-                            <div className="expiry-date-card">{formik.values.expiryDate}</div>
+                            <div className="expiry-date-card">
+                                {
+                                    (!formik.values.month && !formik.values.year)
+                                    ? "MM/YY"
+                                    : `${formik.values.month} / ${formik.values.year}`
+
+                                }
+                            </div>
                         </div>
                     </div>
                 )
@@ -126,14 +132,60 @@ const Form = () => {
                         : null
                     }
 
-                    <label htmlFor="expiryDate">Fecha de expiración</label>
-                    <input 
-                        type="number"
-                        name="expiryDate" 
-                        id="expiryDate"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
-                    />
+                    <label htmlFor="month">Fecha de expiración</label>
+                    <div className="container-expiryDate">
+                        <select
+                            id="month" 
+                            name="month" 
+                            value={formik.values.month}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        >   
+                            <option value="" label="MM" />
+                            <option>01</option>
+                            <option>02</option>
+                            <option>03</option>
+                            <option>04</option>
+                            <option>05</option>
+                            <option>06</option>
+                            <option>07</option>
+                            <option>08</option>
+                            <option>09</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+
+                        <select
+                            id="year" 
+                            name="year" 
+                            value={formik.values.year}
+                            onChange={formik.handleChange}
+                            onBlur={formik.handleBlur}
+                        >
+                            <option value="" label="YY" />
+                            <option>2020</option>
+                            <option>2021</option>
+                            <option>2022</option>
+                            <option>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                            <option>2026</option>
+                            <option>2027</option>
+                            <option>2028</option>
+                            <option>2029</option>
+                            <option>2030</option>
+                            <option>2031</option>
+                            <option>2032</option>
+                            <option>2033</option>
+                            <option>2034</option>
+                            <option>2035</option>
+                        </select>                        
+                    </div>
+                    {   (formik.touched.month && formik.errors.month)
+                        ? <div className="formik-errors">{formik.errors.month}</div>
+                        : null
+                    }
 
                     <label htmlFor="cvc">Código de seguridad</label>
                     <input 
