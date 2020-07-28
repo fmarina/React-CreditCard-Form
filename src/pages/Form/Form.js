@@ -14,10 +14,10 @@ const Form = () => {
 
     const formik = useFormik({
         initialValues: {
-            cardNumber: '**** **** **** ****',
+            cardNumber: '',
             fullName: '',
             expiryDate: 'MM/YY',
-            cvc: '***',
+            cvc: '',
             dni: ''  
         },
         validate,
@@ -72,10 +72,20 @@ const Form = () => {
                         }
                         </div>
                         <div className="number-card">
-                            {formatCardNumber(String(formik.values.cardNumber))}
+                            {
+                                (!formik.values.cardNumber)
+                                ? "**** **** **** ****"
+                                : formatCardNumber(String(formik.values.cardNumber))
+                            }
                         </div>
                         <div className="card-data-container">
-                            <div className="fullName-card">{formik.values.fullName}</div>
+                            <div className="fullName-card">
+                                {
+                                    (!formik.values.fullName)
+                                    ? "Nombre y Apellido"
+                                    : formik.values.fullName
+                                }
+                            </div>
                             <div className="expiry-date-card">{formik.values.expiryDate}</div>
                         </div>
                     </div>
@@ -109,6 +119,7 @@ const Form = () => {
                         onChange={formik.handleChange}
                         value={formik.values.fullName}
                         onBlur={formik.handleBlur}
+                        autoComplete="off"
                     />                    
                     {   (formik.touched.fullName && formik.errors.fullName)
                         ? <div className="formik-errors">{formik.errors.fullName}</div>
@@ -130,7 +141,10 @@ const Form = () => {
                         name="cvc" 
                         id="cvc"
                         onChange={formik.handleChange}
-                        onBlur={() => setShowCreditCard(false)}
+                        onBlur={(e) => (
+                            setShowCreditCard(false),
+                            formik.handleBlur(e)
+                        )}
                         onFocus={() => setShowCreditCard(true)}
                         value={formik.values.cvc}
                     />
@@ -144,6 +158,9 @@ const Form = () => {
                         type="number"
                         name="dni" 
                         id="dni"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.dni}
                     />
                     {   (formik.touched.dni && formik.errors.dni)
                         ? <div className="formik-errors">{formik.errors.dni}</div>

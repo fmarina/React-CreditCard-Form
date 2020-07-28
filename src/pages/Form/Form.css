@@ -146,6 +146,12 @@ form input:focus {
     border-bottom: 2px solid rgb(98, 126, 253);
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    margin: 0; 
+}
+
 .formik-errors {
     color: red;
     font-size: 12px;

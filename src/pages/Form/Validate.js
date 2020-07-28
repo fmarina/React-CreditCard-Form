@@ -1,10 +1,12 @@
 const validate = (values) => {
     const errors = {};
 
-    if(!values.cardNumber) {
-        errors.cardNumber = "Requerido";
-    } else if(typeof (values.cardNumber) !== "number" ) {
+    const regexNumber = /^[0-9]+$/;
+    if(!values.cardNumber) errors.cardNumber = "Requerido";
+    if(typeof (values.cardNumber) !== "number" ) {
         errors.cardNumber = "Tipo de dato incorrecto";
+    } else if(!regexNumber.test(String(values.cardNumber))) {
+        errors.cardNumber = "Tipo de dato incorrecto"
     } else if(String(values.cardNumber).length < 13) {
         errors.cardNumber = "Error en el número de tarjeta";
     } else if( String(values.cardNumber).length > 19) {
@@ -20,15 +22,22 @@ const validate = (values) => {
         errors.fullName = "Tipo de dato incorrecto";
     }
 
+    
     if(!values.cvc) {
         errors.cvc = "Requerido";
-    } else if (String(values.cvc).length !== 3) {
+    } 
+    if(typeof(values.cvc) !== "number") {
+        errors.cvc = "Error en el tipo de dato";
+    } else if(!regexNumber.test(String(values.cvc))) {
+        errors.cvc = "Error en el tipo de dato";
+    }
+    else if (String(values.cvc).length !== 3) {
         errors.cvc = "Debe ingresar los 3 dígitos de seguridad";
     }
 
     if(!values.dni) {
         errors.dni = "Requerido";
-    } else if (typeof(values.dni) !== "number") {
+    } if(typeof(values.dni) !== "number") {
         errors.dni = "Tipo de dato inválido";
     } else if (String(values.dni).length !== 7 && String(values.dni).length !== 8) {
         errors.dni = "Documento inválido";
