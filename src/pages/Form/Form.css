@@ -24,7 +24,7 @@
     background: #0575E6;
     background: -webkit-linear-gradient(to left, #021B79, #0575E6);
     background: linear-gradient(to left, #021B79, #0575E6);
-    color: rgba(255, 255, 255, 0.76);
+    color: rgba(255, 255, 255, 0.89);
     box-shadow: 2px 2px 15px 0 rgba(0, 0, 0, 0.16);
 }
 
@@ -158,6 +158,25 @@ input[type=number]::-webkit-outer-spin-button {
     margin-top: -10px;
     margin-bottom: 10px;
 }
+
+.container-expiryDate {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
+
+.container-expiryDate select {
+    margin-right: 5px;
+    outline: none;
+    border-color: rgb(165, 165, 165);
+    color: rgb(102, 102, 102);
+    border-radius: 3px;
+    padding: 3px;
+}
+
+
 
 form button {
     width: 50%;
