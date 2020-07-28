@@ -82,9 +82,19 @@
     background-color: red;
 }
 
-.chip-container img {
+.chip-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chip-card {
     width: 30px;
     height: 20px;
+}
+
+.bank-logo {
+    width: 40px;
+    
 }
 
 .number-card {

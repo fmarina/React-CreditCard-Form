@@ -9,10 +9,13 @@ const validate = (values) => {
         errors.cardNumber = "Error en el número de tarjeta";
     }
 
+    const regex = /^([a-zA-Z _-]+)$/
     if(!values.fullName) {
         errors.fullName = "Requerido";
     } else if (values.fullName.length < 4) {
         errors.fullName = "Ingrese el nombre y apellido completo"
+    } else if (!regex.test(values.fullName)) {
+        errors.fullName = "Tipo de dato incorrecto";
     }
 
     if(!values.cvc) {

@@ -1,6 +1,9 @@
 import React, {useState} from 'react';
 import './Form.css';
-import cardChip from '../../assets/images/chip-card.png';
+import cardChip from '../../assets/images/card-chip.png';
+import master from '../../assets/images/master.png';
+import visa from '../../assets/images/visa.png';
+import amex from '../../assets/images/amex.png';
 import { useFormik } from 'formik';
 import validate from './Validate';
 import Flip from 'react-reveal/Flip';
@@ -23,6 +26,11 @@ const Form = () => {
         },
     });
 
+    const bankValidate = (cardNumber) => {
+        if(/^3\d+/.test(cardNumber)) return amex;
+        if(/^4\d+/.test(cardNumber)) return visa;
+        if(/^5\d+/.test(cardNumber)) return master;
+    }
 
     return (
         <div className="form-container">
@@ -42,7 +50,14 @@ const Form = () => {
             :
                 (   <div className="credit-card">
                         <div className="chip-container"> 
-                            <img src={cardChip} alt="card chip" />
+                            <img src={cardChip} alt="card chip" className="chip-card" />
+                        {   (bankValidate(formik.values.cardNumber) !== undefined) &&
+                                <img 
+                                    src={bankValidate(formik.values.cardNumber)} 
+                                    alt="bank logo" 
+                                    className="bank-logo" 
+                                />
+                        }
                         </div>
                         <div className="number-card">{formik.values.cardNumber}
                         </div>
