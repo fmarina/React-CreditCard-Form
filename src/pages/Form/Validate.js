@@ -5,7 +5,9 @@ const validate = (values) => {
         errors.cardNumber = "Requerido";
     } else if(typeof (values.cardNumber) !== "number" ) {
         errors.cardNumber = "Tipo de dato incorrecto";
-    } else if (String(values.cardNumber).length !== 16 ) {
+    } else if(String(values.cardNumber).length < 13) {
+        errors.cardNumber = "Error en el número de tarjeta";
+    } else if( String(values.cardNumber).length > 19) {
         errors.cardNumber = "Error en el número de tarjeta";
     }
 
@@ -34,7 +36,6 @@ const validate = (values) => {
         errors.dni = "Documento inválido";
     }
 
-    
     return errors;
 }
 
