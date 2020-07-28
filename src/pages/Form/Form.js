@@ -7,6 +7,7 @@ import amex from '../../assets/images/amex.png';
 import { useFormik } from 'formik';
 import validate from './Validate';
 import Flip from 'react-reveal/Flip';
+import Label from './components/Label/Label';
 
 const Form = () => {
 
@@ -103,7 +104,7 @@ const Form = () => {
                 
                 <form onSubmit={formik.handleSubmit}>
 
-                    <label htmlFor="cardNumber">Número de la tarjeta</label>
+                    <Label labelfor={"cardNumber"} text="Número de la tarjeta"/>
                     <input 
                         type="number"
                         name="cardNumber" 
@@ -117,7 +118,7 @@ const Form = () => {
                         : null
                     }
 
-                    <label htmlFor="fullName">Nombre y Apellido</label>
+                    <Label labelfor={"fullName"} text="Nombre y Apellido"/>
                     <input 
                         type="text"
                         name="fullName" 
@@ -132,7 +133,7 @@ const Form = () => {
                         : null
                     }
 
-                    <label htmlFor="month">Fecha de expiración</label>
+                    <Label labelfor={"month"} text="Fecha de expiración"/>
                     <div className="container-expiryDate">
                         <select
                             id="month" 
@@ -187,7 +188,7 @@ const Form = () => {
                         : null
                     }
 
-                    <label htmlFor="cvc">Código de seguridad</label>
+                    <Label labelfor={"cvc"} text="Código de seguridad"/>
                     <input 
                         type="number"
                         name="cvc" 
@@ -205,7 +206,7 @@ const Form = () => {
                         : null
                     }
 
-                    <label htmlFor="dni">DNI del titular de la tarjeta</label>
+                    <Label labelfor={"dni"} text="DNI del titular de la tarjeta"/>
                     <input 
                         type="number"
                         name="dni" 
