@@ -8,6 +8,7 @@ import { useFormik } from 'formik';
 import validate from './Validate';
 import Flip from 'react-reveal/Flip';
 import Label from './components/Label/Label';
+import Input from './components/Input/Input';
 
 const Form = () => {
 
@@ -46,11 +47,9 @@ const Form = () => {
 
     return (
         <div className="form-container">
-
             <div className="credit-card-content">
             { (showCreditCard)
-            ?
-                (   <Flip left>
+            ?   (   <Flip left>
                     <div className="credit-card-back">
                         <div className="line-magnet"></div>
                         <div className="data-cvc">
@@ -59,39 +58,32 @@ const Form = () => {
                     </div>
                     </Flip>
                 )   
-            :
-                (   <div className="credit-card">
+            :   (   <div className="credit-card">
                         <div className="chip-container"> 
                             <img src={cardChip} alt="card chip" className="chip-card" />
                         {   (bankValidate(formik.values.cardNumber) !== undefined) &&
-                                <img 
+                                <img alt="bank logo" className="bank-logo"
                                     src={bankValidate(formik.values.cardNumber)} 
-                                    alt="bank logo" 
-                                    className="bank-logo" 
                                 />
                         }
                         </div>
                         <div className="number-card">
-                            {
-                                (!formik.values.cardNumber)
+                            {   (!formik.values.cardNumber)
                                 ? "**** **** **** ****"
                                 : formatCardNumber(String(formik.values.cardNumber))
                             }
                         </div>
                         <div className="card-data-container">
                             <div className="fullName-card">
-                                {
-                                    (!formik.values.fullName)
+                                {   (!formik.values.fullName)
                                     ? "Nombre y Apellido"
                                     : formik.values.fullName
                                 }
                             </div>
                             <div className="expiry-date-card">
-                                {
-                                    (!formik.values.month && !formik.values.year)
+                                {   (!formik.values.month && !formik.values.year)
                                     ? "MM/YY"
                                     : `${formik.values.month} / ${formik.values.year}`
-
                                 }
                             </div>
                         </div>
@@ -100,18 +92,14 @@ const Form = () => {
             }
             </div>
 
-            <div className="form-content">
-                
+            <div className="form-content">                
                 <form onSubmit={formik.handleSubmit}>
 
                     <Label labelfor={"cardNumber"} text="Número de la tarjeta"/>
-                    <input 
-                        type="number"
-                        name="cardNumber" 
-                        id="cardNumber"
-                        onChange={formik.handleChange}
+                    <Input type="number" name="cardNumber" id="cardNumber" 
+                        handleChange={formik.handleChange} 
                         value={formik.values.cardNumber}
-                        onBlur={formik.handleBlur}
+                        handleBlur={formik.handleBlur}
                     />
                     {   (formik.touched.cardNumber && formik.errors.cardNumber)
                         ? <div className="formik-errors">{formik.errors.cardNumber}</div>
@@ -119,15 +107,11 @@ const Form = () => {
                     }
 
                     <Label labelfor={"fullName"} text="Nombre y Apellido"/>
-                    <input 
-                        type="text"
-                        name="fullName" 
-                        id="fullName"
-                        onChange={formik.handleChange}
+                    <Input type="text" name="fullName" id="fullName"
+                        handleChange={formik.handleChange}
                         value={formik.values.fullName}
-                        onBlur={formik.handleBlur}
-                        autoComplete="off"
-                    />                    
+                        handleBlur={formik.handleBlur}
+                    />
                     {   (formik.touched.fullName && formik.errors.fullName)
                         ? <div className="formik-errors">{formik.errors.fullName}</div>
                         : null
@@ -189,31 +173,26 @@ const Form = () => {
                     }
 
                     <Label labelfor={"cvc"} text="Código de seguridad"/>
-                    <input 
-                        type="number"
-                        name="cvc" 
-                        id="cvc"
-                        onChange={formik.handleChange}
-                        onBlur={(e) => (
+                    <Input type="number" name="cvc" id="cvc"
+                        handleChange={formik.handleChange}
+                        value={formik.values.cvc}
+                        handleBlur={(e) => (
                             setShowCreditCard(false),
                             formik.handleBlur(e)
                         )}
-                        onFocus={() => setShowCreditCard(true)}
-                        value={formik.values.cvc}
+                        handleFocus={() => setShowCreditCard(true)}
                     />
+
                     {   (formik.touched.cvc && formik.errors.cvc)
                         ? <div className="formik-errors">{formik.errors.cvc}</div>
                         : null
                     }
 
                     <Label labelfor={"dni"} text="DNI del titular de la tarjeta"/>
-                    <input 
-                        type="number"
-                        name="dni" 
-                        id="dni"
-                        onChange={formik.handleChange}
-                        onBlur={formik.handleBlur}
+                    <Input type="number" name="dni" id="dni"
                         value={formik.values.dni}
+                        handleChange={formik.handleChange}
+                        handleBlur={formik.handleBlur}
                     />
                     {   (formik.touched.dni && formik.errors.dni)
                         ? <div className="formik-errors">{formik.errors.dni}</div>
@@ -226,7 +205,6 @@ const Form = () => {
 
         </div>
     );
-
 }
 
 export default Form;
