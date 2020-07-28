@@ -22,6 +22,16 @@ const validate = (values) => {
         errors.fullName = "Tipo de dato incorrecto";
     }
 
+    const month = new Date().getMonth() +1;
+    const year = new Date().getFullYear();
+    if(values.month === "") {
+        errors.month = "Debe ingresar la fecha de vencimiento"
+    } else if (values.year === "") {
+        errors.month = "Debe ingresar la fecha de vencimiento"
+    }
+    if(Number(values.month) <= month && Number(values.year) === year){
+        errors.month = "Fecha vencida";
+    }
     
     if(!values.cvc) {
         errors.cvc = "Requerido";
