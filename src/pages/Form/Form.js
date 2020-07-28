@@ -32,6 +32,18 @@ const Form = () => {
         if(/^5\d+/.test(cardNumber)) return master;
     }
 
+    const formatCardNumber = (cardNumber) => {
+        // amex format 4 6 5 digitos
+        if(cardNumber.replace(/ /g, '').match(/\b(\d{4})(\d{6})(\d{5})\b/)) {
+            cardNumber = cardNumber.replace(/\W/gi, '')
+                                   .replace(/\b(\d{4})(\d{6})(\d{5})\b/, '$1 $2 $3')
+                                   .trim();
+        } else { // visa, master format
+            cardNumber = cardNumber.replace(/\W/gi, '').replace(/(.{4})/g, '$1 ').trim();
+        }
+        return cardNumber
+    }
+
     return (
         <div className="form-container">
 
@@ -59,7 +71,8 @@ const Form = () => {
                                 />
                         }
                         </div>
-                        <div className="number-card">{formik.values.cardNumber}
+                        <div className="number-card">
+                            {formatCardNumber(String(formik.values.cardNumber))}
                         </div>
                         <div className="card-data-container">
                             <div className="fullName-card">{formik.values.fullName}</div>
